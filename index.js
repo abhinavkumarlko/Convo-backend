@@ -31,6 +31,10 @@ app.use(express.json());
 //cors is used for allowing front-end request
 app.use(cors({ origin: ["http://localhost:3000"] }));
 
+const UserRouter = require("./routers/userRouters");
+
+app.use("/user", UserRouter);
+
 //route or endpoint
 app.get("/", (req, res) => {
   res.send("response from express");
