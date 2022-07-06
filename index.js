@@ -23,6 +23,7 @@ io.on("connection", (socket) => {
   });
 });
 
+const UserRouter = require("./routers/userRouters");
 const cors = require("cors");
 
 //middleware to convert client json data to javascript
@@ -31,7 +32,7 @@ app.use(express.json());
 //cors is used for allowing front-end request
 app.use(cors({ origin: ["http://localhost:3000"] }));
 
-const UserRouter = require("./routers/userRouters");
+
 
 app.use("/user", UserRouter);
 

@@ -20,4 +20,39 @@ router.post("/add", (req, res) => {
     });
 });
 
+
+// to fetch all the users data
+router.get("/getall", (req, res) => {
+  Model.find({})
+    .then((result) => {
+      console.log("user Data fetched");
+      res.json(result);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json(err);
+    });
+});
+
+// for login page
+router.post("/authenticate", (req, res) => {
+  const formdata = req.body;
+
+  // to find the first entry
+  Model.findOne({ email: formdata.email, password: formdata.password })
+    .then((userdata) => {
+      if (userdata) {
+        console.log("login success");
+        res.status(200).json(userdata);
+      } else {
+        console.log("login failed");
+        res.status(300).json({ loginStatus: false });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json(err);
+    });
+});
+
 module.exports = router;
