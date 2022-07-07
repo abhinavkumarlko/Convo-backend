@@ -12,6 +12,8 @@ const io = new Server(httpServer, {
   cors: { origin: ["http://localhost:3000"] },
 });
 
+const onlineUsers = {};
+
 //recieving the event
 io.on("connection", (socket) => {
   console.log("client connected");
@@ -21,6 +23,9 @@ io.on("connection", (socket) => {
     data.sent = false;
     socket.broadcast.emit("recmsg", data);
   });
+
+
+  
 });
 
 const UserRouter = require("./routers/userRouters");
