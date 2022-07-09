@@ -24,8 +24,11 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("recmsg", data);
   });
 
-
-  
+  socket.on("setonline", (userid) => {
+    console.log(userid);
+    onlineUsers[userid] = socket.id;
+    socket.emit("usersonline", onlineUsers);
+  });
 });
 
 const UserRouter = require("./routers/userRouters");
@@ -36,8 +39,6 @@ app.use(express.json());
 
 //cors is used for allowing front-end request
 app.use(cors({ origin: ["http://localhost:3000"] }));
-
-
 
 app.use("/user", UserRouter);
 
