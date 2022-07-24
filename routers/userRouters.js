@@ -20,10 +20,24 @@ router.post("/add", (req, res) => {
     });
 });
 
-
 // to fetch all the users data
 router.get("/getall", (req, res) => {
   Model.find({})
+    .populate("contacts")
+    .then((result) => {
+      console.log("user Data fetched");
+      res.json(result);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json(err);
+    });
+});
+
+router.put("/pushupdate/:id", (req, res) => {
+  console.log(req.body);
+  Model.findByIdAndUpdate(req.params.id, { $push: req.body }, { new: true })
+    .populate("contacts")
     .then((result) => {
       console.log("user Data fetched");
       res.json(result);
@@ -40,6 +54,7 @@ router.post("/authenticate", (req, res) => {
 
   // to find the first entry
   Model.findOne({ email: formdata.email, password: formdata.password })
+    .populate("contacts")
     .then((userdata) => {
       if (userdata) {
         console.log("login success");
