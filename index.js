@@ -21,7 +21,8 @@ io.on("connection", (socket) => {
   socket.on("sendmsg", (data) => {
     console.log(data);
     data.sent = false;
-    socket.broadcast.emit("recmsg", data);
+    console.log(onlineUsers[data.rec_id]);
+    socket.to(onlineUsers[data.rec_id]).emit("recmsg", data);
   });
 
   socket.on("setonline", (userid) => {

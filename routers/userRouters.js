@@ -33,6 +33,17 @@ router.get("/getall", (req, res) => {
       res.json(err);
     });
 });
+router.get("/getbyemail/:email", (req, res) => {
+  Model.findOne({ email: req.params.email })
+    .then((result) => {
+      console.log("user Data fetched");
+      res.json(result);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json(err);
+    });
+});
 
 router.put("/pushupdate/:id", (req, res) => {
   console.log(req.body);
