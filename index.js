@@ -32,7 +32,8 @@ io.on("connection", (socket) => {
   });
 });
 
-const UserRouter = require("./routers/userRouters");
+const UserRouter = require("./routers/userRouter");
+const ChatRouter = require("./routers/chatRouter");
 const cors = require("cors");
 
 //middleware to convert client json data to javascript
@@ -42,6 +43,7 @@ app.use(express.json());
 app.use(cors({ origin: ["http://localhost:3000"] }));
 
 app.use("/user", UserRouter);
+
 
 //route or endpoint
 app.get("/", (req, res) => {
