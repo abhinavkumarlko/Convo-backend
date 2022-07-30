@@ -59,6 +59,37 @@ router.put("/pushupdate/:id", (req, res) => {
     });
 });
 
+//managing user and update
+router.delete("/delete/:id", (req, res) => {
+  Model.findByIdAndDelete(req.params.id)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json(err);
+    });
+});
+
+router.get("/getbyid/:userid", (req, res) => {
+  console.log(req.params.userid);
+  res.send("Response from getbyid");
+});
+
+
+router.put("/update/:id", (req, res) => {
+  const formdata = req.body;
+
+  // to find the entry by id and update with formdata
+  Model.findByIdAndUpdate(req.params.id, formdata)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json(err);
+    });
+});
 // for login page
 router.post("/authenticate", (req, res) => {
   const formdata = req.body;
