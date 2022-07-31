@@ -23,7 +23,7 @@ router.post("/add", (req, res) => {
 // to fetch all the users data
 router.get("/getall", (req, res) => {
   Model.find({})
-    .populate("contacts")
+    // .populate("contacts")
     .then((result) => {
       console.log("user Data fetched");
       res.json(result);
@@ -46,6 +46,7 @@ router.get("/getbyemail/:email", (req, res) => {
 });
 
 router.get("/getbyuser/:userid/:recid", (req, res) => {
+  console.log('user : ', req.params.userid, 'rec : ', req.params.recid);
   Model.find({ user: req.params.userid, rec: req.params.recid })
     .then((result) => {
       console.log("chat Data fetched");

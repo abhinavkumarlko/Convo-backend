@@ -43,6 +43,7 @@ app.use(express.json());
 app.use(cors({ origin: ["http://localhost:3000"] }));
 
 app.use("/user", UserRouter);
+app.use("/chat", ChatRouter);
 
 
 //route or endpoint
